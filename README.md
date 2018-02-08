@@ -1,5 +1,5 @@
 # jackdou-chinamap
-laravel 中国地图web Api集合
+laravel扩展 中国地图 webApi 集合
 
 ## 功能介绍
 
@@ -11,6 +11,32 @@ laravel 中国地图web Api集合
 ## 安装说明
 
   - 使用composer安装
-  - 配置
-  - 使用
   
+    > composer require jackdou/chinamap
+    
+    建议使用 [中国composer全量镜像](https://pkg.phpcomposer.com)
+    
+  - 配置
+  
+    在 config/app.php providers数组 内添加一行
+    
+    Jackdou\Chinamap\ChinamapServicesProvider::class
+    
+    执行命令生成配置文件
+    
+    > php artisan vendor:publish
+    
+    需要使用哪种地图接口，需要先去相应的地图网站申请成为应用开发者，具体操作请翻阅相关文档。
+    
+    [百度地图](http://lbsyun.baidu.com/index.php?title=webapi)
+    [高德地图](http://lbs.amap.com/api/webservice/summary)
+    [腾讯地图](http://lbs.qq.com/webservice_v1/index.html)
+    
+    申请了应用对应的密钥后需要再配置文件config/chinamap.php中对应的添加上
+    
+  - 使用
+  直接使用Map门面调用
+  
+    ```
+    Map::locateIp($ip) //Ip转换
+    ```

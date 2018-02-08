@@ -1,6 +1,6 @@
 {
     "name": "jackdou/chinamap",
-    "description": "集合了中国国内主流地图api，可以可简单的调用使用任意一个地图接口，完美",
+    "description": "集合了中国国内主流地图webAPI，统一接口，使用方便",
     "type": "library",
     "license": "MIT",
     "authors": [
