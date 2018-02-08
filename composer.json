@@ -1,0 +1,25 @@
+{
+    "name": "jackdou/chinamap",
+    "description": "集合了中国国内主流地图api，可以可简单的调用使用任意一个地图接口，完美",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jackdou",
+            "email": "1139209675@qq.com"
+        }
+    ],
+    "require": {
+        "ixudra/curl": "^6.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jackdou\\Chinamap\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jackdou\\Chinamap\\Tests\\": "tests/"
+        }
+    }
+}
