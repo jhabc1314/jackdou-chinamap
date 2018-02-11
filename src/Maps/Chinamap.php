@@ -1,14 +1,12 @@
 <?php
 namespace Jackdou\Chinamap\Maps;
 
-use Jackdou\Chinamap\Contracts\Map;
-
-class Chinamap implements Map
+class Chinamap
 {
     /**
      * web地图api 版本
      */
-    const VERSION = '1.0';
+    const VERSION = '0.1';
 
     /**
      * 使用的地图类型
@@ -27,7 +25,7 @@ class Chinamap implements Map
      */
     private function initMap()
     {
-        foreach (self::MAPS as $item) {
+        foreach (config('chinamap.maps') as $item) {
             $className = 'Jackdou\Chinamap\Maps\\' . ucfirst($item) . 'Map';
             app()->singleton($item, $className);
         }
@@ -59,18 +57,17 @@ class Chinamap implements Map
         return app($this->mapType, $param);
     }
 
-    public function locateIp($ip = null)
+    /**
+     * 调用对应api的接口时引导到相应的实例服务
+     * @param $function
+     * @param $args
+     * @return mixed
+     */
+    public function __call($function, $args)
     {
-        return $this->getMap()->locateIp($ip);
-    }
-
-    public function geoConvert($coords, $from = 1, $to = 5, $outPut = 'json')
-    {
-        return $this->getMap()->geoConvert();
-    }
-
-    public function geoCoder()
-    {
-        return $this->getMap()->geoCoder();
+        if ($args) {
+            return $this->getMap()->$function($args[0]);
+        }
+        return $this->getMap()->$function();
     }
 }

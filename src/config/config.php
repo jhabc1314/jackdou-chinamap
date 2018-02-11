@@ -55,5 +55,15 @@ return [
      */
     'qq' => [
         ''
-    ]
+    ],
+
+    /*
+     * 支持的地图Api列表
+     * @var array
+     */
+    'maps' => [
+        'baidu' => 'baidu',
+        'gaode' => 'amap',
+        'tengxu' => 'qq',
+    ],
 ];

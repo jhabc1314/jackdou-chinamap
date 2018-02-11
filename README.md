@@ -38,5 +38,10 @@ laravel扩展 中国地图 webApi 集合
   直接使用Map门面调用
   
     ```
-    Map::locateIp($ip) //Ip转换
+    IP定位
+    Map::locateIp($ip) //使用配置里的默认地图选择
+    Map::type('amap')->locateIp($ip) //使用选择的地图，amap为高德 baidu为百度，qq为腾讯
+    Map::outPut()->locateIp($ip); //选择输出格式，默认为json，调用outPut后无需传参数，返回格式变成xml
+    
+    未完待续。。。
     ```

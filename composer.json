@@ -10,6 +10,8 @@
         }
     ],
     "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": ">=5.4",
         "ixudra/curl": "^6.7"
     },
     "autoload": {
