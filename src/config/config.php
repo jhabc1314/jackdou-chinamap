@@ -8,7 +8,7 @@ return [
     /*
      * 百度地图api应用开发者数据
      * ak 为开发者密钥，可在百度地图api控制台申请获得
-     * sn 若用户所用AK的校验方式为SN校验时该参数必填。其他AK校验方式的可不填写。
+     * sn 若用户所用AK的校验方式为SN校验时该参数必填。其他AK校验方式的可不填写。目前暂不支持此方式
      */
     'baidu' => [
         'ak' => '',
@@ -54,7 +54,16 @@ return [
      * 腾讯地图api应用开发者账号
      */
     'qq' => [
-        ''
+        /*
+         * 应用者申请密钥
+         */
+        'key' => '',
+
+        /*
+         * Ip定位服务 具体服务文档参见 http://lbs.qq.com/webservice_v1/guide-ip.html
+         */
+        'location.ip' => 'http://apis.map.qq.com/ws/location/v1/ip',
+
     ],
 
     /*
@@ -63,7 +72,7 @@ return [
      */
     'maps' => [
         'baidu' => 'baidu',
-        'gaode' => 'amap',
-        'tengxu' => 'qq',
+        'amap' => 'amap',
+        'qq' => 'qq',
     ],
 ];
