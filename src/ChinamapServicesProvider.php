@@ -10,7 +10,7 @@ class ChinamapServicesProvider extends ServiceProvider
     {
         // Publish config files
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('chinamap.php'),
+            __DIR__.'/config/config.php' => config_path('chinamap.php'),
         ]);
     }
 
