@@ -26,7 +26,7 @@ class Amapmap implements Map
 
     public function __construct()
     {
-        $this->alias = config('chinamap.maps')['gaode'];
+        $this->alias = config('chinamap.maps')['amap'];
         $this->config = config('chinamap.' . $this->alias);
     }
 
