@@ -36,7 +36,7 @@ class BaiduMap extends MapService implements Map
      * @param $ip
      * @return mixed
      */
-    public function locateIp($ip)
+    public function locateIp($ip = '')
     {
         $domain = $this->config['location.ip']['type'] . '://' . $this->config['location.ip']['url'];
         $param = "?ip=$ip&ak=" . $this->config['ak'];

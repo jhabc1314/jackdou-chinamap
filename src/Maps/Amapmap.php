@@ -35,7 +35,7 @@ class Amapmap implements Map
      * @param $ip
      * @return mixed
      */
-    public function locateIp($ip)
+    public function locateIp($ip = '')
     {
         $domain = $this->config['location.ip'];
         $param = "?ip=$ip&output=$this->outPut&key=" . $this->config['key'];
