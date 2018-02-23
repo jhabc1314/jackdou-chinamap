@@ -4,9 +4,12 @@ namespace Jackdou\Chinamap\Maps;
 
 use Ixudra\Curl\Facades\Curl;
 use Jackdou\Chinamap\Contracts\Map;
+use Jackdou\Chinamap\Exceptions\ChinamapException;
 
 class BaiduMap extends MapService implements Map
 {
+
+
     /**
      * BaiduMap constructor.
      */
@@ -24,12 +27,17 @@ class BaiduMap extends MapService implements Map
     public function locateIp($ip = '')
     {
         $domain = $this->config['location.ip']['type'] . '://' . $this->config['location.ip']['url'];
-        $param = "?ip=$ip&ak=" . $this->config['ak'];
+        $param = "?ip=$ip" . $this->appendParam();
         $url = $domain . $param;
         return Curl::to($url)
             ->get();
     }
 
+    /**
+     * @param $coords
+     * @param array ...$param
+     * @return mixed
+     */
     public function geoConvert($coords, ...$param)
     {
         $default = [
@@ -41,9 +49,35 @@ class BaiduMap extends MapService implements Map
             ->get();
     }
 
-    public function geoCoder(...$param)
+    /**
+     * 地理位置编码/逆编码
+     * 调用此方法前需要设置address变量（编码） 或location变量（逆编码） 否则抛出异常
+     * @return mixed
+     * @throws ChinamapException
+     */
+    public function geoCoder()
     {
-        $url = $this->config['geoconv.v1'] . "?coords=$coords&from=$from&to=$to&ak=" . $this->config['ak'];
+        $domain = $this->config['geocoder.v2'];
+        if (!empty($this->address)) {
+            $param = "?address={$this->address}&city={$this->city}";
+        } elseif (!empty($this->location)) {
+            $param = "?location={$this->location}";
+        } else {
+            throw new ChinamapException('sorry,geoCoder function need “address” or “location” is not empty');
+        }
+        $param .= "&output={$this->outPut}" . $this->appendParam();
+        $url = $domain . $param;
+        return Curl::to($url)
+            ->get();
+    }
+
+    /**
+     * 返回固定的拼接参数
+     * @return string
+     */
+    public function appendParam()
+    {
+        return "&ak={$this->config['ak']}";
     }
 
 }

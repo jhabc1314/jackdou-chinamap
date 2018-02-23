@@ -3,15 +3,6 @@ namespace Jackdou\Chinamap\Contracts;
 
 interface Map
 {
-    /**
-     * 支持的地图Api列表
-     * @var array
-     */
-    const MAPS = [
-        'baidu' => 'baidu',
-        'gaode' => 'amap',
-        'tengxu' => 'qq',
-    ];
 
     /**
      * IP定位
@@ -32,4 +23,11 @@ interface Map
      * @return mixed
      */
     public function geoCoder();
+
+    /**
+     * 追加固定参数
+     * @return mixed
+     */
+    public function appendParam();
+
 }

@@ -31,7 +31,7 @@ return [
         /*
          * 正/逆地理编码服务 具体功能请参见百度文档 http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding
          */
-        'geocoder.v2' => 'http://api.map.baidu.com/geocoder/v2/'
+        'geocoder.v2' => 'http://api.map.baidu.com/geocoder/v2/',
 
     ],
 
@@ -47,6 +47,15 @@ return [
          */
         'location.ip' => 'http://restapi.amap.com/v3/ip?parameters',
 
+        /*
+         * 地理位置编码
+         */
+        'geo' => 'http://restapi.amap.com/v3/geocode/geo',
+
+        /*
+         * 地理位置逆编码
+         */
+        'regeo' => 'http://restapi.amap.com/v3/geocode/regeo',
 
     ],
 
@@ -64,6 +73,10 @@ return [
          */
         'location.ip' => 'http://apis.map.qq.com/ws/location/v1/ip',
 
+        /*
+         * 地理位置编码/逆编码
+         */
+        'geoCoder' => 'http://apis.map.qq.com/ws/geocoder/v1/',
     ],
 
     /*
