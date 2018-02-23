@@ -41,7 +41,14 @@ laravel扩展 中国地图 webApi 集合
     IP定位
     Map::locateIp($ip) //使用配置里的默认地图选择
     Map::type('amap')->locateIp($ip) //使用选择的地图，amap为高德 baidu为百度，qq为腾讯
-    Map::outPut()->locateIp($ip); //选择输出格式，默认为json，调用outPut后无需传参数，返回格式变成xml
-    
-    未完待续。。。
+    //注意：type方法如果调用则必须为第一个调用
+    Map::outPut()->locateIp($ip); //选择输出格式，默认为json，调用outPut后无需传参数，返回格式变成xml（部分地图接口不支持返回xml格式，详细请参见对应的api文档）
+    ```
+    ```
+    地理位置编码/逆编码 （暂不支持批量查询）
+    Map::address('上海市虹口区政府')
+        ->city('上海市')
+        ->geoCoder(); //地理位置编码，具体的地址参数的详细要求参见具体文档，qq地图暂不支持city方法
+    Map::location('31.271,121.494')
+        ->geoCoder(); //地理位置逆编码 百度和qq为纬度在前，经度在后，高德地图相反 
     ```
