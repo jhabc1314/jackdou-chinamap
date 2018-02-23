@@ -8,23 +8,8 @@ use Jackdou\Chinamap\Contracts\Map;
 class BaiduMap extends MapService implements Map
 {
     /**
-     * 地图别名
-     * @var
+     * BaiduMap constructor.
      */
-    public $alias;
-
-    /**
-     * 配置信息
-     * @var \Illuminate\Config\Repository|mixed
-     */
-    public $config;
-
-    /**
-     * 输出格式 json or xml
-     * @var
-     */
-    public $outPut = 'json';
-
     public function __construct()
     {
         $this->alias = config('chinamap.maps')['baidu'];
@@ -61,14 +46,4 @@ class BaiduMap extends MapService implements Map
         $url = $this->config['geoconv.v1'] . "?coords=$coords&from=$from&to=$to&ak=" . $this->config['ak'];
     }
 
-    /**
-     * 输出格式方法，默认为json，不需要调用此方法，如想xml格式，调用此方法即可
-     * @param string $outPut
-     * @return $this
-     */
-    public function outPut($outPut = 'xml')
-    {
-        $this->outPut = $outPut ?: $this->outPut;
-        return $this;
-    }
 }

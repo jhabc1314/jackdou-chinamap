@@ -4,26 +4,12 @@ namespace Jackdou\Chinamap\Maps;
 use Ixudra\Curl\Facades\Curl;
 use Jackdou\Chinamap\Contracts\Map;
 
-class Qqmap implements Map
+class Qqmap extends MapService implements Map
 {
-    /**
-     * 地图别名
-     * @var
-     */
-    public $alias;
 
     /**
-     * 配置信息
-     * @var
+     * Qqmap constructor.
      */
-    public $config;
-
-    /**
-     * 输出格式 json or xml
-     * @var
-     */
-    public $outPut = 'json';
-
     public function __construct()
     {
         $this->alias = config('chinamap.maps')['qq'];
@@ -54,9 +40,5 @@ class Qqmap implements Map
 
     }
 
-    public function outPut($outPut = 'xml')
-    {
-        $this->outPut = $outPut ?: $this->outPut;
-        return $this;
-    }
+
 }

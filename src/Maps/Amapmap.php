@@ -4,26 +4,11 @@ namespace Jackdou\Chinamap\Maps;
 use Ixudra\Curl\Facades\Curl;
 use Jackdou\Chinamap\Contracts\Map;
 
-class Amapmap implements Map
+class Amapmap extends MapService implements Map
 {
     /**
-     * 地图别名
-     * @var
+     * Amapmap constructor.
      */
-    public $alias;
-
-    /**
-     * 配置信息
-     * @var \Illuminate\Config\Repository|mixed
-     */
-    public $config;
-
-    /**
-     * 输出格式 json or xml
-     * @var string
-     */
-    public $outPut = 'json';
-
     public function __construct()
     {
         $this->alias = config('chinamap.maps')['amap'];
@@ -54,14 +39,4 @@ class Amapmap implements Map
 
     }
 
-    /**
-     * 设置输出数据格式
-     * @param string $outPut
-     * @return $this
-     */
-    public function outPut($outPut = 'xml')
-    {
-        $this->outPut = $outPut ?: $this->outPut;
-        return $this;
-    }
 }
