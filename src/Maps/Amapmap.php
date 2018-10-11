@@ -5,7 +5,7 @@ use Ixudra\Curl\Facades\Curl;
 use Jackdou\Chinamap\Contracts\Map;
 use Jackdou\Chinamap\Exceptions\ChinamapException;
 
-class Amapmap extends MapService implements Map
+class AmapMap extends MapService implements Map
 {
 
     /**
