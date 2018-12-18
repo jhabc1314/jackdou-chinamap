@@ -21,30 +21,30 @@ class BaiduMap extends MapService implements Map
 
     /**
      * IP定位Api
-     * @param $ip
+     * @param $ip string
+     * @throws ChinamapException
      * @return mixed
      */
-    public function locateIp($ip = '')
+    public function locateIp($ip)
     {
+        if (empty($ip)) {
+            throw new ChinamapException('sorry,Ip can not empty');
+        }
         $domain = $this->config['location.ip']['type'] . '://' . $this->config['location.ip']['url'];
-        $param = "?ip=$ip" . $this->appendParam();
+        $param = "?ip=$ip&output={$this->outPut}" . $this->appendParam();
         $url = $domain . $param;
         return Curl::to($url)
             ->get();
     }
 
     /**
-     * @param $coords
-     * @param array ...$param
+     * 坐标转换服务
+     * @param $coords string 坐标，多组坐标以;分隔
      * @return mixed
      */
-    public function geoConvert($coords, ...$param)
+    public function geoConvert($coords)
     {
-        $default = [
-            'from' => 1,
-            'to' => 5
-        ];
-        $url = $this->config['geoconv.v1'] . "?coords=$coords&from=$from&to=$to&ak=" . $this->config['ak'];
+        $url = $this->config['geoconv.v1'] . "?coords=$coords&ak=" . $this->config['ak'];
         return Curl::to($url)
             ->get();
     }
@@ -63,11 +63,32 @@ class BaiduMap extends MapService implements Map
         } elseif (!empty($this->location)) {
             $param = "?location={$this->location}";
         } else {
-            throw new ChinamapException('sorry,geoCoder function need “address” or “location” is not empty');
+            throw new ChinamapException('sorry,geoCoder function need “address” or “location” must not empty');
         }
         $param .= "&output={$this->outPut}" . $this->appendParam();
         $url = $domain . $param;
         return Curl::to($url)
+            ->get();
+    }
+
+
+    /**
+     * @param $destination string 目的地坐标 格式 维度，经度 小数点后不能超过6位
+     * @throws ChinamapException
+     * @return mixed
+     */
+    public function transit($destination)
+    {
+        if (empty($this->origin)) {
+            throw new ChinamapException('sorry,transit need call origin func first');
+        }
+        if (empty($destination)) {
+            throw new ChinamapException('sorry, destination can not empty');
+        }
+        $domain = $this->config['transit'];
+        $param = "origin={$this->origin}&destination={$destination}&output={$this->outPut}";
+        $param .= $this->appendParam();
+        return Curl::to($domain . $param)
             ->get();
     }
 

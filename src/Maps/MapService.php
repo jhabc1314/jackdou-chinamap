@@ -36,6 +36,19 @@ class MapService
     public $location;
 
     /**
+     * 路径规划接口起点坐标 格式 维度，经度 小数点后不能超过6位
+     * @var
+     */
+    public $origin;
+
+    /**
+     * 路径规划的出行方式，适用高德地图和腾讯地图，百度地图无效
+     * 默认公交
+     * @var
+     */
+    public $transitType = 'integrated';
+
+    /**
      * 输出格式 json or xml
      * @var
      */
@@ -43,6 +56,7 @@ class MapService
 
     /**
      * 输出格式方法，默认为json，不需要调用此方法，如想xml格式，调用此方法即可
+     * 注意：部分接口或地图不支持此参数
      * @param string $outPut
      * @return $this
      */
@@ -89,6 +103,28 @@ class MapService
     public function location($location)
     {
         $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * 路径规划起点坐标
+     * @param $origin string 格式 维度，经度 小数点不能超过6位
+     * @return $this
+     */
+    public function origin($origin)
+    {
+        $this->origin = $origin;
+        return $this;
+    }
+
+    /**
+     * 路径规划出行方式 默认公交。针对高德地图和腾讯地图，百度地图无效
+     * @param string $type
+     * @return $this
+     */
+    public function transitType($type = "integrated")
+    {
+        $this->transitType = $type;
         return $this;
     }
 

@@ -31,9 +31,25 @@ class AmapMap extends MapService implements Map
             ->get();
     }
 
+    /**
+     * 坐标转换服务
+     * @param string $coords 格式 经度，纬度
+     * @throws ChinamapException
+     * @return mixed
+     */
     public function geoConvert($coords)
     {
-
+        if (empty($coords)) {
+            throw new ChinamapException('sorry,locations cant not empty');
+        }
+        $domain = $this->config['convert'];
+        $param = [
+            'locations' => $coords,
+            'output' => $this->outPut
+        ];
+        $param = http_build_query($param) . $this->appendParam();
+        return Curl::to($domain . $param)
+            ->get();
     }
 
     /**
@@ -53,6 +69,28 @@ class AmapMap extends MapService implements Map
             throw new ChinamapException('sorry,geoCoder function need “address” or “location” is not empty');
         }
         $url = $domain . $param . $this->appendParam();
+        return Curl::to($url)
+            ->get();
+    }
+
+    /**
+     * 路径规划
+     * @param string $destination
+     * @throws ChinamapException
+     * @return mixed
+     */
+    public function transit($destination)
+    {
+        if (empty($this->transitType)) {
+            throw new ChinamapException('sorry,transitType can not empty');
+        }
+        $domain = $this->config['transit'][$this->transitType];
+        $param = [
+            'origin' => $this->origin,
+            'destination' => $destination,
+            'output' => $this->outPut,
+        ];
+        $url = $domain . http_build_query($param) . $this->appendParam();
         return Curl::to($url)
             ->get();
     }

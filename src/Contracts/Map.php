@@ -13,7 +13,7 @@ interface Map
 
     /**
      * 坐标转换
-     * @param $coords
+     * @param $coords string 坐标
      * @return mixed
      */
     public function geoConvert($coords);
@@ -23,6 +23,13 @@ interface Map
      * @return mixed
      */
     public function geoCoder();
+
+    /**
+     * 路线规划
+     * @param string $destination
+     * @return mixed
+     */
+    public function transit($destination);
 
     /**
      * 追加固定参数
