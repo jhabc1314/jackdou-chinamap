@@ -6,7 +6,7 @@ class Chinamap
     /**
      * web地图api 版本
      */
-    const VERSION = '0.1';
+    const VERSION = '1.3.1';
 
     /**
      * 使用的地图类型
@@ -26,7 +26,7 @@ class Chinamap
     private function initMap()
     {
         foreach (config('chinamap.maps') as $item) {
-            $className = 'Jackdou\Chinamap\Maps\\' . ucfirst($item) . 'Map';
+            $className = 'Jackdou\Chinamap\Maps\\' . ucfirst($item) . 'map';
             app()->singleton($item, $className);
         }
     }
